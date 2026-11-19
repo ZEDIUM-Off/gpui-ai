@@ -6517,7 +6517,7 @@ impl Render for Gallery {
                 .on_mouse_move(cx.listener(|this, event: &MouseMoveEvent, _, cx| {
                     this.track_autoscroll_pointer(event.position, cx);
                 }))
-                .on_scroll_wheel(cx.listener(|this, event: &ScrollEvent, _, cx| {
+                .on_scroll(cx.listener(|this, event: &ScrollEvent, _, cx| {
                     this.handle_catalog_wheel(event, cx);
                 }))
                 .on_action(cx.listener(|this, _: &ScrollHome, _, cx| {
