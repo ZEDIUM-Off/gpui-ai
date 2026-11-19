@@ -190,6 +190,15 @@ use gpui::App;
 /// `gpui_component::init` separately.
 pub fn init(cx: &mut App) {
     gpui_component::init(cx);
+    init_on_initialized_component(cx);
+}
+
+/// Initializes gpui-ai in an application that already called
+/// [`gpui_component::init`].
+///
+/// A second `gpui_component::init` rebinds its keys and resets the theme to
+/// light, which would discard the host's theme.
+pub fn init_on_initialized_component(cx: &mut App) {
     // The motion policy, before any component renders — and only unless the
     // application already chose one, so either order of init and
     // customization lands on the application's values.

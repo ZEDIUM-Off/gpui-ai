@@ -6687,6 +6687,27 @@ pub fn init(cx: &mut App) {
     ]);
 }
 
+/// Initializes gpui-ai and the bundled themes for a host that already
+/// initialized gpui-component, without the gallery's key bindings.
+pub fn init_embedded(cx: &mut App) {
+    gpui_ai::init_on_initialized_component(cx);
+    for pack in BUNDLED_THEME_FILES {
+        ThemeRegistry::global_mut(cx)
+            .load_themes_from_str(pack)
+            .expect("bundled theme packs must be valid JSON");
+    }
+}
+
+/// A gallery that shows only `selected`, without its own title and theme
+/// control, for a host that frames the story itself.
+pub fn embedded_story(selected: StoryId, cx: &mut App) -> Entity<Gallery> {
+    cx.new(|cx| {
+        let mut gallery = Gallery::new(selected, cx);
+        gallery.set_chrome(GalleryChrome::Embedded, cx);
+        gallery
+    })
+}
+
 /// Opens a gallery window for `selected`.
 pub fn open_gallery(selected: StoryId, cx: &mut App) {
     open_gallery_window(selected, None, cx);
