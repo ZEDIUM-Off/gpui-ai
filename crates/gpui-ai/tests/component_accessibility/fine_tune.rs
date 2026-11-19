@@ -6,8 +6,8 @@
 
 use gpui::{
     AppContext as _, Context, Entity, InteractiveElement as _, Modifiers, ParentElement as _,
-    Render, ScrollDelta, ScrollEvent, Styled as _, Subscription, TestAppContext,
-    VisualTestContext, Window, div, point, px,
+    Render, ScrollDelta, ScrollEvent, Styled as _, Subscription, TestAppContext, VisualTestContext,
+    Window, div, point, px,
 };
 use gpui_ai::prelude::{FineTuneCard, FineTuneEvent, FineTuneTypeface, FineTuneValues};
 use std::{cell::RefCell, rc::Rc};

@@ -8,8 +8,8 @@
 
 use gpui::{
     AppContext as _, ClipboardItem, Context, Entity, InteractiveElement as _, Modifiers,
-    MouseButton, ParentElement as _, Render, ScrollDelta, ScrollEvent, Styled as _,
-    Subscription, TestAppContext, VisualTestContext, Window, div, point, px,
+    MouseButton, ParentElement as _, Render, ScrollDelta, ScrollEvent, Styled as _, Subscription,
+    TestAppContext, VisualTestContext, Window, div, point, px,
 };
 use gpui_ai::selection_actions::{SelectionAction, SelectionActions, SelectionActionsEvent};
 use std::{cell::RefCell, rc::Rc};
