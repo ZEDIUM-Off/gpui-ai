@@ -49,13 +49,6 @@ struct Visibility {
     visible: Entity<bool>,
 }
 
-impl IntoElement for Visibility {
-    type Element = Self;
-    fn into_element(self) -> Self {
-        self
-    }
-}
-
 impl Element for Visibility {
     type RequestLayoutState = ();
     type PrepaintState = ();

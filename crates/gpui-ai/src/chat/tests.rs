@@ -295,7 +295,7 @@ fn a_reader_can_scroll_back_while_an_answer_is_still_streaming(cx: &mut TestAppC
     };
     let center = chat.read_with(cx, |chat, _| chat.list_state.viewport_bounds().center());
     let turn_wheel = |cx: &mut VisualTestContext| {
-        cx.simulate_event(gpui::ScrollWheelEvent {
+        cx.simulate_event(gpui::ScrollEvent {
             position: center,
             delta: gpui::ScrollDelta::Pixels(gpui::point(px(0.), px(120.))),
             modifiers: Modifiers::default(),
@@ -356,7 +356,7 @@ fn a_medium_jump_keeps_its_full_distance_and_reader_input_cancels_it(cx: &mut Te
     });
     cx.update(|window, cx| window.draw(cx).clear(cx));
     let center = chat.read_with(cx, |chat, _| chat.list_state.viewport_bounds().center());
-    cx.simulate_event(gpui::ScrollWheelEvent {
+    cx.simulate_event(gpui::ScrollEvent {
         position: center,
         delta: gpui::ScrollDelta::Pixels(gpui::point(px(0.), px(0.5))),
         modifiers: Modifiers::default(),

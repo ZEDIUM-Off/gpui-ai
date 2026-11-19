@@ -16,20 +16,18 @@ publish = false  # the gallery crates are demos; `gpui-ai` overrides this
 [workspace.dependencies]
 gpui-ai = { path = "crates/gpui-ai" }
 
-# GPUI Kit publishes the whole stack, GPUI included: `gpui-pre` is a snapshot
-# of Zed's crate, and the layers move together by semver. The package renames
-# keep every `use gpui::`, `use gpui_component::`, and `gpui_component_assets::`
-# path in this workspace pointing at the same names it always did.
-gpui = { package = "gpui-pre", version = "0.3.3" }
-gpui_platform = { package = "gpui-pre-platform", version = "0.3.3", features = [
+# Zedbench vendors this fork at `components/gpui-ai`, next to its GPUI Kit fork,
+# and links one GPUI: the editor's own crate.
+gpui = { path = "../../crates/gpui" }
+gpui_platform = { path = "../../crates/gpui_platform", features = [
     "font-kit",
     "x11",
     "wayland",
     "runtime_shaders",
 ] }
-gpui-component = "0.6.0"
-gpui-component-assets = { package = "gpui-kit-assets", version = "0.6.0" }
-gpui-base = "0.6.0"
+gpui-component = { path = "../gpui-kit/crates/component" }
+gpui-component-assets = { package = "gpui-kit-assets", path = "../gpui-kit/crates/assets" }
+gpui-base = { path = "../gpui-kit/crates/base" }
 
 anyhow = "1"
 console_error_panic_hook = "0.1"

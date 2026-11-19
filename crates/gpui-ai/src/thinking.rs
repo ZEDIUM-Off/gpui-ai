@@ -537,7 +537,7 @@ impl RenderOnce for Thinking {
 mod tests {
     use super::*;
     use gpui::{
-        Context, Entity, Render, ScrollDelta, ScrollWheelEvent, TestAppContext, VisualTestContext,
+        Context, Entity, Render, ScrollDelta, ScrollEvent, TestAppContext, VisualTestContext,
         point, px,
     };
 
@@ -654,7 +654,7 @@ mod tests {
     /// move toward the top of the content.
     fn scroll_up(cx: &mut VisualTestContext, distance: f32) {
         let preview = cx.debug_bounds(PREVIEW).expect("the preview should render");
-        cx.simulate_event(ScrollWheelEvent {
+        cx.simulate_event(ScrollEvent {
             position: preview.center(),
             delta: ScrollDelta::Pixels(point(px(0.), px(distance))),
             ..Default::default()

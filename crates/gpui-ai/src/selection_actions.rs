@@ -185,13 +185,6 @@ struct ToolbarEntrance {
     travel: Pixels,
 }
 
-impl IntoElement for ToolbarEntrance {
-    type Element = Self;
-    fn into_element(self) -> Self {
-        self
-    }
-}
-
 impl Element for ToolbarEntrance {
     type RequestLayoutState = ();
     type PrepaintState = ();
@@ -668,7 +661,7 @@ impl Render for SelectionActions {
 mod tests {
     use super::*;
     use gpui::{
-        Bounds, Modifiers, RenderOnce as _, ScrollDelta, ScrollWheelEvent, Size, TestAppContext,
+        Bounds, Modifiers, RenderOnce as _, ScrollDelta, ScrollEvent, Size, TestAppContext,
         VisualTestContext, accesskit, canvas, point, px, rems, size,
     };
     use std::sync::{Arc, Mutex};
@@ -1145,7 +1138,7 @@ mod tests {
             .expect("toolbar should render after selection");
 
         for _ in 0..12 {
-            cx.simulate_event(ScrollWheelEvent {
+            cx.simulate_event(ScrollEvent {
                 position: toolbar.center(),
                 delta: ScrollDelta::Pixels(point(px(-120.), Pixels::default())),
                 ..Default::default()
