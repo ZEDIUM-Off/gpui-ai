@@ -23,6 +23,20 @@ path = "src/catalog_export_main.rs"
 required-features = ["export"]
 
 [features]
+default = ["syntax"]
+# Tree-sitter grammars for the CodeBlock stories. A host that links another
+# tree-sitter, such as Zedbench, turns this off: only one crate may link the
+# native library, and TextView falls back to its line highlighter.
+syntax = [
+    "gpui-component/tree-sitter-rust",
+    "gpui-component/tree-sitter-typescript",
+    "gpui-component/tree-sitter-tsx",
+    "gpui-component/tree-sitter-python",
+    "gpui-component/tree-sitter-markdown",
+    "gpui-component/tree-sitter-bash",
+    "gpui-component/tree-sitter-css",
+    "gpui-component/tree-sitter-html",
+]
 performance = ["gpui/profiler", "dep:windows-sys"]
 # Kept behind a feature so serde_json stays out of the shipped gallery and its
 # WASM build; only the catalog exporter needs it.
@@ -40,24 +54,6 @@ gpui-component-assets.workspace = true
 gpui-ai.workspace = true
 gpui-base.workspace = true
 serde_json = { version = "1", optional = true }
-
-# Syntax highlighting for Markdown code fences in native CodeBlock stories.
-# Upstream declares every tree-sitter dependency as native-only, so enabling
-# these features for wasm32 makes gpui-component compile code whose dependency
-# graph is intentionally absent. The browser gallery uses TextView's fallback
-# highlighter until upstream makes the language stack WASM-compatible. JSON is
-# bundled in the base `tree-sitter` feature, so it needs no separate entry.
-[target.'cfg(not(target_family = "wasm"))'.dependencies]
-gpui-component = { workspace = true, features = [
-    "tree-sitter-rust",
-    "tree-sitter-typescript",
-    "tree-sitter-tsx",
-    "tree-sitter-python",
-    "tree-sitter-markdown",
-    "tree-sitter-bash",
-    "tree-sitter-css",
-    "tree-sitter-html",
-] }
 
 [target.'cfg(windows)'.dependencies]
 windows-sys = { version = "0.61", optional = true, features = [
